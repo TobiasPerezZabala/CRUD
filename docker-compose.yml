@@ -17,7 +17,7 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3308/mysql-db
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mysql-db
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: rootpass
 
