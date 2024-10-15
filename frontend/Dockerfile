@@ -1,5 +1,5 @@
 # Usar la versión oficial de Node.js 18
-FROM node:18-alpine AS crud-frontend
+FROM node:18-alpine AS builder
 
 # Directorio de trabajo
 WORKDIR /app
@@ -13,8 +13,14 @@ RUN npm install
 # Ejecutar el build
 RUN npm run build --prod
 
-# Configuración para el servidor (si es necesario)
+# Usar Nginx para servir la aplicación
+FROM nginx:alpine
+
+# Copiar archivos construidos desde el builder
+COPY --from=builder /app/dist/frontend/browser /usr/share/nginx/html
+
+# Exponer el puerto 80
 EXPOSE 80
 
-# Comando para ejecutar el servidor
-CMD ["npm", "start"]
+# Comando por defecto de Nginx
+CMD ["nginx", "-g", "daemon off;"]
