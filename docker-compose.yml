@@ -1,16 +1,15 @@
 version: '3.9'
 services:
-  # Servicio de base de datos MySQL
   db:
-    image: mysql:5.7
+    image: mysql
     environment:
       MYSQL_DATABASE: mysql-db
       MYSQL_ROOT_PASSWORD: rootpass
     ports:
-      - "3308:3306"  # Asegúrate de que el puerto mapeado sea el correcto
+      - "3308:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
-      
+
   backend:
     build: ./backend
     ports:
@@ -22,16 +21,9 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: rootpass
 
-  
-  # Servicio de frontend (Angular)
   frontend:
     build: ./frontend
     ports:
       - "4200:80"
     depends_on:
-      - backend  # Asegúrate de que el backend esté disponible
-    networks:
-      - mynetwork
-
-networks:
-  mynetwork:  # Crear una red para permitir la comunicación entre contenedores
+      - backend
