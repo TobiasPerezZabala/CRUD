@@ -6,7 +6,7 @@ services:
       MYSQL_DATABASE: mysql-db
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3308:3306"
+      - "3306:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
 
@@ -21,9 +21,9 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
 
-  frontend:
-    build: ./frontend
-    ports:
-      - "4200:80"
-    depends_on:
-      - backend
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "4200:80"
+  #   depends_on:
+  #     - backend
